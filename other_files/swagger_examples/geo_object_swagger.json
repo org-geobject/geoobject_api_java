@@ -1,0 +1,106 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "GeoObject API",
+    "version": "V1.0",
+    "title": "GEO Object Data",
+    "contact": {
+      "name": "Diego Pablo Mansilla",
+      "url": "diegopablomansilla@gmail.com"
+    }
+  },
+  "host": "localhost:4567",
+  "tags": [
+    {
+      "name": "GEO Object"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/continentes": {
+      "post": {
+        "summary": "Listado de continentes",
+        "operationId": "continenteBO.findAll(id, continente)",
+        "produces": [
+          "application/json"
+        ],
+		"parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "continente",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/org.geoobject.model.Continente"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Continente"
+            }
+          },
+          "400": {
+            "description": "Invalid input data",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "org.geoobject.model.Continente": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "String"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ApiError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

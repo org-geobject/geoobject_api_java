@@ -1,0 +1,265 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "DonateAPP API",
+    "version": "V1.0",
+    "title": "Some random api for testing",
+    "contact": {
+      "name": "Serol",
+      "url": "https://srlk.github.io"
+    }
+  },
+  "host": "localhost:4567",
+  "tags": [
+    {
+      "name": "swagger"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user": {
+      "post": {
+        "summary": "Creates a new user",
+        "operationId": "CreateUserRoute",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid input data",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "summary": "Gets user details and donations",
+        "operationId": "GetUserRoute",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid input data",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}/donate": {
+      "post": {
+        "summary": "Creates a donation request for the user",
+        "operationId": "DonateRoute",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid input data",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "bloodType": {
+          "type": "string",
+          "enum": [
+            "ABNeg",
+            "ABPos",
+            "ANeg",
+            "APos",
+            "BNeg",
+            "BPos",
+            "NS",
+            "ONeg",
+            "OPos"
+          ]
+        },
+        "donations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Donation"
+          }
+        }
+      }
+    },
+    "Donation": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ApiError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateUserRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "bloodType": {
+          "type": "string",
+          "enum": [
+            "ABNeg",
+            "ABPos",
+            "ANeg",
+            "APos",
+            "BNeg",
+            "BPos",
+            "NS",
+            "ONeg",
+            "OPos"
+          ]
+        }
+      }
+    }
+  }
+}
