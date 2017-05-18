@@ -1,8 +1,6 @@
 package org.geoobject.dao;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,12 +36,12 @@ public class ContinentDAOFileImpl implements IContinentDAO {
 		if (continents == null) {
 			continents = new ArrayList<Continent>();
 		}
-		
-//		for (Continent item : continents) {
-//			if(item.getOrthographicProjectionFile() != null){
-//				item.getOrthographicProjectionFile().setXml(readTxt(item.getOrthographicProjectionFile().getPath()));
-//			}
-//		}
+
+		// for (Continent item : continents) {
+		// if(item.getOrthographicProjectionFile() != null){
+		// item.getOrthographicProjectionFile().setXml(readTxt(item.getOrthographicProjectionFile().getPath()));
+		// }
+		// }
 
 		Collections.sort(continents);
 
@@ -69,9 +67,18 @@ public class ContinentDAOFileImpl implements IContinentDAO {
 
 		List<Continent> continentsReturn = new ArrayList<Continent>();
 		for (Continent item : continents) {
-			if (item.allNames().toLowerCase().contains(name.toLowerCase())) {
-				continentsReturn.add(item);
+
+			String[] words = name.split("[ ]");
+
+			for (String word : words) {
+				word = word.trim();
+				if (word.isEmpty() == false) {
+					if (item.allNames().toLowerCase().contains(word.toLowerCase())) {
+						continentsReturn.add(item);
+					}
+				}
 			}
+
 		}
 
 		return continentsReturn;
@@ -120,37 +127,6 @@ public class ContinentDAOFileImpl implements IContinentDAO {
 
 		return null;
 
-	}
-
-	private static String readTxt(String path) throws Exception {
-		File file = null;
-		FileReader fr = null;
-		BufferedReader br = null;
-
-		String txt = "";
-
-		try {
-			file = new File(path);
-			fr = new FileReader(file);
-			br = new BufferedReader(fr);
-			String line;
-			while ((line = br.readLine()) != null)
-				txt += line + "\n";
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			try {
-				if (null != fr) {
-					fr.close();
-				}
-			} catch (Exception e2) {
-				throw e2;
-			}
-		}
-
-		txt = txt.trim();
-
-		return txt;
 	}
 
 }

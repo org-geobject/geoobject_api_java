@@ -14,9 +14,9 @@ public class ContinentBO {
 		this.continentDAO = continentDAO;
 	}
 
-	public List<Continent> findAll(String name, Integer start, Integer maxresults) throws Exception {
+	public List<Continent> findAll(String name, Integer start, Integer maxResults) throws Exception {
 
-		if (start == null && maxresults == null) {
+		if (start == null && maxResults == null) {
 			if (name == null || name.isEmpty()) {
 				return continentDAO.findAll();
 			} else {
@@ -28,14 +28,14 @@ public class ContinentBO {
 			start = 0;
 		}
 
-		if (maxresults == null || maxresults < 0 || maxresults > 100) {
-			maxresults = 100;
+		if (maxResults == null || maxResults < 0 || maxResults > 50) {
+			maxResults = 50;
 		}
 
 		if (name == null || name.isEmpty()) {
-			return continentDAO.findAll(start, maxresults);
+			return continentDAO.findAll(start, maxResults);
 		} else {
-			return continentDAO.findAll(name, start, maxresults);
+			return continentDAO.findAll(name, start, maxResults);
 		}
 
 	}

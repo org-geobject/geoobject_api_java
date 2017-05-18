@@ -29,7 +29,7 @@
     "/continentes": {
       "get": {
         "summary": "List of continents",
-        "operationId": "continentBO.findAll(name, start, maxresults)",
+        "operationId": "continentBO.findAll(name, start, maxResults)",
         "produces": [
           "application/json"
         ],
@@ -47,7 +47,7 @@
             "type": "integer"
           },
           {
-            "name": "maxresults",
+            "name": "maxResults",
             "in": "query",
             "required": false,
             "type": "integer"

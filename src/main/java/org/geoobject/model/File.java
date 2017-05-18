@@ -6,8 +6,6 @@ public class File {
 	private String fileName;
 	private String link;
 	private String path;
-	private String b64;
-	private String xml;
 
 	public String getTitle() {
 		return title;
@@ -39,22 +37,6 @@ public class File {
 
 	public void setPath(String path) {
 		this.path = path;
-	}
-
-	public String getB64() {
-		return b64;
-	}
-
-	public void setB64(String b64) {
-		this.b64 = b64;
-	}
-
-	public String getXml() {
-		return xml;
-	}
-
-	public void setXml(String xml) {
-		this.xml = xml;
 	}
 
 	@Override

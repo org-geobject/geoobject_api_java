@@ -12,7 +12,7 @@ public class GeoObjectCx extends AbstractContext {
 
 	private boolean cache;
 	private String filePathContinents;
-	
+
 	private GeoObjectCx() {
 		filePathContinents = "C:\\Users\\Usuario\\Downloads\\geo2\\geo_model\\continents.json";
 	}
