@@ -8,7 +8,7 @@ public class App {
 
 		// args = new String[] {
 		// "/home/java/Descargas/geo_object_swagger.json" };
-		args = new String[] { "D:\\geo_object_swagger.json" };
+		args = new String[] { "D:\\dev\\source\\geoobject_api_java\\other_files\\swagger_examples\\geo_object_swagger.json" };
 
 		try {
 			RouteBuilderBySwagger.getInstance(GeoObjectCx.getInstance(),

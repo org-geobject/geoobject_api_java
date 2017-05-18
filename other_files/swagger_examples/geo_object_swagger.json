@@ -27,51 +27,61 @@
   ],
   "paths": {
     "/continentes": {
-      "post": {
-        "summary": "Listado de continentes",
-        "operationId": "continenteBO.findAll(id, continente)",
+      "get": {
+        "summary": "List of continents",
+        "operationId": "continentBO.findAll(name, start, maxresults)",
         "produces": [
           "application/json"
         ],
-		"parameters": [
+        "parameters": [          
           {
-            "name": "id",
+            "name": "name",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
-            "in": "body",
-            "name": "continente",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/org.geoobject.model.Continente"
-            }
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/Continente"
+              "$ref": "#/definitions/org.geoobject.model.Continent"
             }
-          },
-          "400": {
-            "description": "Invalid input data",
+          }
+        }
+      }
+    },
+    "/continentes/{id}": {
+      "get": {
+        "summary": "Continent by ID",
+        "operationId": "continentBO.findById(id)",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [          
+          {
+            "name": "id",
+            "in": "path",            
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          },
-          "404": {
-            "description": "User not found",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "#/definitions/org.geoobject.model.Continent"
             }
           }
         }
@@ -79,7 +89,7 @@
     }
   },
   "definitions": {
-    "org.geoobject.model.Continente": {
+    "org.geoobject.model.Continent": {
       "type": "object",
       "properties": {
         "id": {
