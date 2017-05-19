@@ -2,10 +2,19 @@ package org.geoobject.model;
 
 public class File {
 
+	private String id;
 	private String title;
 	private String fileName;
 	private String link;
 	private String path;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getTitle() {
 		return title;
@@ -20,6 +29,9 @@ public class File {
 	}
 
 	public void setFileName(String fileName) {
+		if(fileName != null){
+			fileName = fileName.toLowerCase();
+		}
 		this.fileName = fileName;
 	}
 
@@ -41,7 +53,7 @@ public class File {
 
 	@Override
 	public String toString() {
-		return "File [title=" + title + ", fileName=" + fileName + "]";
+		return "File [id=" + id + ", title=" + title + ", fileName=" + fileName + "]";
 	}
 
 }
