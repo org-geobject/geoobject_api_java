@@ -3,6 +3,8 @@ package org.geoobject.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.cendra.model.commons.File;
+
 public class Country {
 
 	/**
