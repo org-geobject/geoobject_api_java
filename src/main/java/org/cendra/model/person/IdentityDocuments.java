@@ -103,7 +103,7 @@ public class IdentityDocuments implements Serializable, Comparable, Cloneable {
 			}
 		}
 
-		return identities;
+		return r;
 	}
 
 }

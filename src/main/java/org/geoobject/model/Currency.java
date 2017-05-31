@@ -1,30 +1,12 @@
 package org.geoobject.model;
 
-public class Currency {
+import org.cendra.model.commons.EntityDomain;
 
-	@SuppressWarnings("unused")
-	private String id;
-	private String code;
+public class Currency extends EntityDomain {
 
-	public String getId() {
-		return code;
-	}
-
-	public void setId(String id) {
-		this.code = id;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	@Override
-	public String toString() {
-		return "Currency [code=" + code + "]";
-	}
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 388065059412969290L;
 
 }

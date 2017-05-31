@@ -3,9 +3,16 @@ package org.geoobject.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.cendra.model.commons.EntityErasableCoded;
+import org.cendra.model.commons.EntityId;
 import org.cendra.model.commons.File;
 
-public class Country {
+public class Country extends EntityId {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7569489252323330439L;
 
 	/**
 	 * Assigned to a country, territory, or area of geographical interest.
@@ -37,9 +44,6 @@ public class Country {
 	 */
 	public static final String UNASSIGNED = "Unassigned";
 
-	@SuppressWarnings("unused")
-	private String id;
-	
 	private Boolean independent;
 	private Boolean recognisedStates;
 	private String iso2State;
@@ -62,7 +66,7 @@ public class Country {
 	private String postalCodeFormat;
 	private String postalCodeRegex;
 	private List<TimeZone> timeZones = new ArrayList<TimeZone>();
-	private List<Currency> currencyList = new ArrayList<Currency>();
+	private List<Currency> currencies = new ArrayList<Currency>();
 	private List<Languaje> languajes = new ArrayList<Languaje>();
 
 	private String geonameId;
@@ -81,7 +85,7 @@ public class Country {
 	private String urlGeonamesMap;
 	private String urlGeonamesOtherCountryNames;
 	private String urlGeonamesAdministrativeDivision;
-	
+
 	public String getId() {
 		return iso2;
 	}
@@ -179,27 +183,48 @@ public class Country {
 	}
 
 	public List<AlternateName> getAlternateNames() {
+		alternateNames = formatValueAlternateNames(alternateNames);
 		return alternateNames;
 	}
 
 	public void setAlternateNames(List<AlternateName> alternateNames) {
+		alternateNames = formatValueAlternateNames(alternateNames);
 		this.alternateNames = alternateNames;
 	}
 
+	public void addAlternateName(AlternateName alternateName) {
+		alternateNames = formatValueAlternateNames(alternateNames);
+		this.alternateNames.add(alternateName);
+	}
+
 	public List<String> getAbbreviations() {
+		abbreviations = formatValueAbbreviations(abbreviations);
 		return abbreviations;
 	}
 
 	public void setAbbreviations(List<String> abbreviations) {
+		abbreviations = formatValueAbbreviations(abbreviations);
 		this.abbreviations = abbreviations;
 	}
 
+	public void addAbbreviation(String abbreviation) {
+		abbreviations = formatValueAbbreviations(abbreviations);
+		this.abbreviations.add(abbreviation);
+	}
+
 	public List<String> getIataCodes() {
+		iataCodes = formatValueIataCodes(iataCodes);
 		return iataCodes;
 	}
 
 	public void setIataCodes(List<String> iataCodes) {
+		iataCodes = formatValueIataCodes(iataCodes);
 		this.iataCodes = iataCodes;
+	}
+
+	public void addIataCode(String iataCode) {
+		iataCodes = formatValueIataCodes(iataCodes);
+		this.iataCodes.add(iataCode);
 	}
 
 	public String getCapital() {
@@ -243,27 +268,48 @@ public class Country {
 	}
 
 	public List<TimeZone> getTimeZones() {
+		timeZones = formatValueTimeZones(timeZones);
 		return timeZones;
 	}
 
 	public void setTimeZones(List<TimeZone> timeZones) {
+		timeZones = formatValueTimeZones(timeZones);
 		this.timeZones = timeZones;
 	}
 
-	public List<Currency> getCurrencyList() {
-		return currencyList;
+	public void addTimeZone(TimeZone timeZone) {
+		timeZones = formatValueTimeZones(timeZones);
+		this.timeZones.add(timeZone);
 	}
 
-	public void setCurrencyList(List<Currency> currencyList) {
-		this.currencyList = currencyList;
+	public List<Currency> getCurrencies() {
+		currencies = formatValueCurrencies(currencies);
+		return currencies;
+	}
+
+	public void setCurrencies(List<Currency> currencies) {
+		currencies = formatValueCurrencies(currencies);
+		this.currencies = currencies;
+	}
+
+	public void addCurrency(Currency currency) {
+		currencies = formatValueCurrencies(currencies);
+		this.currencies.add(currency);
 	}
 
 	public List<Languaje> getLanguajes() {
+		languajes = formatValueLanguajes(languajes);
 		return languajes;
 	}
 
 	public void setLanguajes(List<Languaje> languajes) {
+		languajes = formatValueLanguajes(languajes);
 		this.languajes = languajes;
+	}
+
+	public void addLanguaje(Languaje languaje) {
+		languajes = formatValueLanguajes(languajes);
+		this.languajes.add(languaje);
 	}
 
 	public String getGeonameId() {
@@ -371,11 +417,223 @@ public class Country {
 	}
 
 	@Override
+	public Country clone() throws CloneNotSupportedException {
+		Country other = (Country) super.clone();
+
+		other.setIndependent(this.getIndependent());
+		other.setRecognisedStates(this.getRecognisedStates());
+		other.setIso2State(this.getIso2State());
+		if (this.getContinent() != null) {
+			other.setContinent(this.getContinent().clone());
+		} else {
+			other.setContinent(null);
+		}
+		other.setIso2(this.getIso2());
+		other.setIso3(this.getIso3());
+		other.setIsoNumeric(this.getIsoNumeric());
+		other.setFips(this.getFips());
+		other.setEquivalentFipsCode(this.getEquivalentFipsCode());
+		other.setShortName(this.getShortName());
+		other.setDescription(this.getDescription());
+		if (this.getAlternateNames() != null) {
+			for (AlternateName alternateName : this.getAlternateNames()) {
+				if (alternateName != null) {
+					this.addAlternateName(alternateName.clone());
+				}
+
+			}
+		} else {
+			other.setAlternateNames(null);
+		}
+		if (this.getAbbreviations() != null) {
+			for (String abbreviation : this.getAbbreviations()) {
+				if (abbreviation != null) {
+					this.addAbbreviation(abbreviation);
+				}
+
+			}
+		} else {
+			other.setAbbreviations(null);
+		}
+		if (this.getIataCodes() != null) {
+			for (String iataCode : this.getIataCodes()) {
+				if (iataCode != null) {
+					this.addIataCode(iataCode);
+					;
+				}
+
+			}
+		} else {
+			other.setIataCodes(null);
+			;
+		}
+		other.setCapital(this.getCapital());
+		other.setTld(this.getTld());
+		other.setPhone(this.getPhone());
+		other.setPostalCodeFormat(this.getPostalCodeFormat());
+		other.setPostalCodeRegex(this.getPostalCodeRegex());
+
+		if (this.getTimeZones() != null) {
+			for (TimeZone timeZone : this.getTimeZones()) {
+				if (timeZone != null) {
+					this.addTimeZone(timeZone.clone());
+				}
+
+			}
+		} else {
+			other.setLanguajes(null);
+		}
+
+		if (this.getCurrencies() != null) {
+			for (Currency currency : this.getCurrencies()) {
+				if (currency != null) {
+					this.addCurrency((Currency) currency.clone());
+				}
+
+			}
+		} else {
+			other.setCurrencies(null);
+		}
+		if (this.getLanguajes() != null) {
+			for (Languaje languaje : this.getLanguajes()) {
+				if (languaje != null) {
+					this.addLanguaje(languaje.clone());
+				}
+
+			}
+		} else {
+			other.setLanguajes(null);
+		}
+		other.setGeonameId(this.geonameId);
+
+		if (this.getFlagAFile() != null) {
+			other.setFlagAFile(this.getFlagAFile().clone());
+		} else {
+			other.setFlagAFile(null);
+		}
+		if (this.getFlagBFile() != null) {
+			other.setFlagBFile(this.getFlagBFile().clone());
+		} else {
+			other.setFlagBFile(null);
+		}
+		if (this.getCoatOfArms() != null) {
+			other.setCoatOfArms(this.getCoatOfArms().clone());
+		} else {
+			other.setCoatOfArms(null);
+		}
+		if (this.getOrthographicProjectionFile() != null) {
+			other.setOrthographicProjectionFile(this.getOrthographicProjectionFile().clone());
+		} else {
+			other.setOrthographicProjectionFile(null);
+		}
+		if (this.getRegionFile() != null) {
+			other.setRegionFile(this.getRegionFile().clone());
+		} else {
+			other.setRegionFile(null);
+		}
+		if (this.getMapFile() != null) {
+			other.setMapFile(this.getMapFile());
+		} else {
+			other.setMapFile(null);
+		}
+		other.setUrlWikipedia(this.getUrlWikipedia());
+		other.setUrlWikipedia2(this.getUrlWikipedia2());
+		other.setUrlGeonames(this.getUrlGeonames());
+		other.setUrlGeonamesMap(this.getUrlGeonamesMap());
+		other.setUrlGeonamesOtherCountryNames(this.getUrlGeonamesOtherCountryNames());
+		other.setUrlGeonamesAdministrativeDivision(this.getUrlGeonamesAdministrativeDivision());
+
+		return other;
+	}
+
+	@Override
 	public String toString() {
 		return "Country [iso2=" + iso2 + ", iso3=" + iso3 + ", isoNumeric=" + isoNumeric + ", fips=" + fips
 				+ ", shortName=" + shortName + "]";
 	}
 
-	
-	
+	protected List<AlternateName> formatValueAlternateNames(List<AlternateName> alternateNames) {
+		List<AlternateName> r = new ArrayList<AlternateName>();
+
+		if (alternateNames != null) {
+			for (AlternateName alternateName : alternateNames) {
+				if (alternateName != null) {
+					r.add(alternateName);
+				}
+			}
+		}
+
+		return r;
+	}
+
+	protected List<String> formatValueAbbreviations(List<String> abbreviations) {
+		List<String> r = new ArrayList<String>();
+
+		if (abbreviations != null) {
+			for (String abbreviation : abbreviations) {
+				if (abbreviation != null) {
+					r.add(abbreviation);
+				}
+			}
+		}
+
+		return r;
+	}
+
+	protected List<String> formatValueIataCodes(List<String> iataCodes) {
+		List<String> r = new ArrayList<String>();
+
+		if (iataCodes != null) {
+			for (String iataCode : iataCodes) {
+				if (iataCode != null) {
+					r.add(iataCode);
+				}
+			}
+		}
+
+		return r;
+	}
+
+	protected List<Languaje> formatValueLanguajes(List<Languaje> languajes) {
+		List<Languaje> r = new ArrayList<Languaje>();
+
+		if (languajes != null) {
+			for (Languaje languaje : languajes) {
+				if (languaje != null) {
+					r.add(languaje);
+				}
+			}
+		}
+
+		return r;
+	}
+
+	protected List<TimeZone> formatValueTimeZones(List<TimeZone> timeZones) {
+		List<TimeZone> r = new ArrayList<TimeZone>();
+
+		if (timeZones != null) {
+			for (TimeZone timeZone : timeZones) {
+				if (timeZone != null) {
+					r.add(timeZone);
+				}
+			}
+		}
+
+		return r;
+	}
+
+	protected List<Currency> formatValueCurrencies(List<Currency> currencies) {
+		List<Currency> r = new ArrayList<Currency>();
+
+		if (currencies != null) {
+			for (Currency currency : currencies) {
+				if (currency != null) {
+					r.add(currency);
+				}
+			}
+		}
+
+		return r;
+	}
+
 }

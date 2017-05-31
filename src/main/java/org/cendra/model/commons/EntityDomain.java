@@ -1,6 +1,6 @@
 package org.cendra.model.commons;
 
-public class EntityDomain extends EntityErasable {
+public class EntityDomain extends EntityErasableCoded {
 
 	/**
 	 * 
