@@ -3,7 +3,6 @@ package org.geoobject.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.cendra.model.commons.EntityErasableCoded;
 import org.cendra.model.commons.EntityId;
 import org.cendra.model.commons.File;
 
@@ -459,13 +458,11 @@ public class Country extends EntityId {
 			for (String iataCode : this.getIataCodes()) {
 				if (iataCode != null) {
 					this.addIataCode(iataCode);
-					;
 				}
 
 			}
 		} else {
 			other.setIataCodes(null);
-			;
 		}
 		other.setCapital(this.getCapital());
 		other.setTld(this.getTld());
@@ -547,9 +544,34 @@ public class Country extends EntityId {
 	}
 
 	@Override
+	public int compareTo(Object o) {
+
+		if (o != null && o instanceof Country == false) {
+			throw new IllegalArgumentException(
+					"It was expected " + Country.class.getSimpleName() + " and not " + o.getClass().getCanonicalName());
+		}
+
+		if (this.getIso2() != null && o != null) {
+			return this.getIso2().compareTo(((Country) o).getIso2());
+		}
+
+		if (this.getIso2() != null && o == null) {
+			return this.getIso2().compareTo("");
+		}
+
+		return "".compareTo(((Languaje) o).getIso639_3());
+	}
+	
+	@Override
 	public String toString() {
-		return "Country [iso2=" + iso2 + ", iso3=" + iso3 + ", isoNumeric=" + isoNumeric + ", fips=" + fips
-				+ ", shortName=" + shortName + "]";
+		
+		String s = super.toString();
+
+		if (this.getShortName() != null) {
+			return (s + " (" + this.getShortName() + ")").trim();
+		}
+
+		return "";
 	}
 
 	protected List<AlternateName> formatValueAlternateNames(List<AlternateName> alternateNames) {

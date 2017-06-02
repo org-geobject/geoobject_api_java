@@ -1,9 +1,8 @@
 package org.geoobject.model;
 
-import java.io.Serializable;
+import org.cendra.model.commons.EntityErasable;
 
-@SuppressWarnings("rawtypes")
-public class GeoLocation implements Serializable, Comparable, Cloneable {
+public class Address extends EntityErasable {
 
 	/**
 	 * 
@@ -14,6 +13,12 @@ public class GeoLocation implements Serializable, Comparable, Cloneable {
 	private AdminDivision1 adminDivision1;
 	private String locality;
 	private String zipCode;
+	private String neighbourhood;
+	private String street;
+	private String streetNumber;
+	private String floor;
+	private String room;
+	private String building;
 	private GeoCoordinates geoCoordinates;
 	private String comment;
 
@@ -49,6 +54,54 @@ public class GeoLocation implements Serializable, Comparable, Cloneable {
 		this.zipCode = zipCode;
 	}
 
+	public String getNeighbourhood() {
+		return neighbourhood;
+	}
+
+	public void setNeighbourhood(String neighbourhood) {
+		this.neighbourhood = neighbourhood;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getStreetNumber() {
+		return streetNumber;
+	}
+
+	public void setStreetNumber(String streetNumber) {
+		this.streetNumber = streetNumber;
+	}
+
+	public String getFloor() {
+		return floor;
+	}
+
+	public void setFloor(String floor) {
+		this.floor = floor;
+	}
+
+	public String getRoom() {
+		return room;
+	}
+
+	public void setRoom(String room) {
+		this.room = room;
+	}
+
+	public String getBuilding() {
+		return building;
+	}
+
+	public void setBuilding(String building) {
+		this.building = building;
+	}
+
 	public GeoCoordinates getGeoCoordinates() {
 		return geoCoordinates;
 	}
@@ -66,8 +119,8 @@ public class GeoLocation implements Serializable, Comparable, Cloneable {
 	}
 
 	@Override
-	public GeoLocation clone() throws CloneNotSupportedException {
-		GeoLocation other = new GeoLocation();
+	public Address clone() throws CloneNotSupportedException {
+		Address other = new Address();
 
 		if (this.getCountry() != null) {
 			other.setCountry(this.getCountry().clone());
@@ -81,6 +134,12 @@ public class GeoLocation implements Serializable, Comparable, Cloneable {
 		}
 		other.setLocality(this.getLocality());
 		other.setZipCode(this.getZipCode());
+		other.setNeighbourhood(this.getNeighbourhood());
+		other.setStreet(this.getStreet());
+		other.setStreetNumber(this.getStreetNumber());
+		other.setFloor(this.getFloor());
+		other.setRoom(this.getRoom());
+		other.setBuilding(this.getRoom());
 		if (this.getGeoCoordinates() != null) {
 			other.setGeoCoordinates(this.getGeoCoordinates().clone());
 		} else {
@@ -95,38 +154,38 @@ public class GeoLocation implements Serializable, Comparable, Cloneable {
 	public int compareTo(Object o) {
 
 		if (o != null && o instanceof GeoCoordinates == false) {
-			throw new IllegalArgumentException("It was expected " + GeoLocation.class.getSimpleName() + " and not "
-					+ o.getClass().getCanonicalName());
+			throw new IllegalArgumentException(
+					"It was expected " + Address.class.getSimpleName() + " and not " + o.getClass().getCanonicalName());
 		}
 
 		if (o != null) {
 			if (this.getCountry() == null) {
 				return -1;
 			}
-			if (((GeoLocation) o).getCountry() == null) {
+			if (((Address) o).getCountry() == null) {
 				return 1;
 			}
-			int r = this.getCountry().compareTo(((GeoLocation) o).getCountry());
+			int r = this.getCountry().compareTo(((Address) o).getCountry());
 			if (r < 0) {
 				return r;
 			}
 			if (this.getAdminDivision1() == null) {
 				return -1;
 			}
-			if (((GeoLocation) o).getAdminDivision1() == null) {
+			if (((Address) o).getAdminDivision1() == null) {
 				return 1;
 			}
-			r = this.getAdminDivision1().compareTo(((GeoLocation) o).getAdminDivision1());
+			r = this.getAdminDivision1().compareTo(((Address) o).getAdminDivision1());
 			if (r < 0) {
 				return r;
 			}
 			if (this.getLocality() == null) {
 				return -1;
 			}
-			if (((GeoLocation) o).getLocality() == null) {
+			if (((Address) o).getLocality() == null) {
 				return 1;
 			}
-			return this.getLocality().compareTo(((GeoLocation) o).getLocality());
+			return this.getLocality().compareTo(((Address) o).getLocality());
 		}
 
 		return 1;
@@ -136,7 +195,7 @@ public class GeoLocation implements Serializable, Comparable, Cloneable {
 	@Override
 	public String toString() {
 
-		return this.getCountry() + ", " + this.getAdminDivision1() + ", " + this.getLocality();
+		return this.getCountry() + ", " + this.getAdminDivision1() + ", " + this.getLocality() + ", " + this.getNeighbourhood() + ", " + this.getStreet();
 	}
 
 }
