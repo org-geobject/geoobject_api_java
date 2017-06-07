@@ -12,18 +12,20 @@ public class Candidate {
 
 	private String firstName;
 	private String otherNames;
-	private String surnames;
-	private BloodFactor bloodFactor;
+	private String surnames;	
 	private BloodGroup bloodGroup;
+	private BloodFactor bloodFactor;
 	private PersonGender gender;
 	private Date dateOfBirth;
 	private Integer age;
 	private String fullAge;
 	private String identityNumberDNI;
 	private String identityNumberCUIL;
+	
 	private Country countryBirth;
 	private AdminDivision1 adminDivision1Birth;
 	private String localityBirth;
+	
 	private Country countryNationality;
 
 	private String localityAddress;
