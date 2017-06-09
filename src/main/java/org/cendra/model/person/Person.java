@@ -1,6 +1,7 @@
 package org.cendra.model.person;
 
 import org.cendra.model.commons.File;
+import org.yacare.model.student.EducationLevel;
 
 public class Person {
 
@@ -14,6 +15,8 @@ public class Person {
 	private Nationalities nationalities = new Nationalities();
 	private CommunicationOptions communicationOptions = new CommunicationOptions();
 	private PersonHealthData healthData = new PersonHealthData();
+	private EducationLevel educationLevel;
+	private String professionOccupation;
 
 	public File getPhoto() {
 		return photo;
@@ -56,73 +59,89 @@ public class Person {
 	}
 
 	public IdentityDocuments getIdentityDocuments() {
-		if(identityDocuments == null){
-			identityDocuments = new IdentityDocuments();	
+		if (identityDocuments == null) {
+			identityDocuments = new IdentityDocuments();
 		}
 		return identityDocuments;
 	}
 
 	public void setIdentityDocuments(IdentityDocuments identityDocuments) {
-		if(identityDocuments == null){
-			identityDocuments = new IdentityDocuments();	
+		if (identityDocuments == null) {
+			identityDocuments = new IdentityDocuments();
 		}
 		this.identityDocuments = identityDocuments;
 	}
 
 	public PersonBirth getBirth() {
-		if(birth == null){
-			birth = new PersonBirth();	
+		if (birth == null) {
+			birth = new PersonBirth();
 		}
 		return birth;
 	}
 
 	public void setBirth(PersonBirth birth) {
-		if(birth == null){
-			birth = new PersonBirth();	
+		if (birth == null) {
+			birth = new PersonBirth();
 		}
 		this.birth = birth;
 	}
 
 	public Nationalities getNationalities() {
-		if(nationalities == null){
-			nationalities = new Nationalities();	
+		if (nationalities == null) {
+			nationalities = new Nationalities();
 		}
 		return nationalities;
 	}
 
 	public void setNationalities(Nationalities nationalities) {
-		if(nationalities == null){
-			nationalities = new Nationalities();	
+		if (nationalities == null) {
+			nationalities = new Nationalities();
 		}
 		this.nationalities = nationalities;
 	}
 
 	public CommunicationOptions getCommunicationOptions() {
-		if(communicationOptions == null){
-			communicationOptions = new CommunicationOptions();	
+		if (communicationOptions == null) {
+			communicationOptions = new CommunicationOptions();
 		}
 		return communicationOptions;
 	}
 
 	public void setCommunicationOptions(CommunicationOptions communicationOptions) {
-		if(communicationOptions == null){
-			communicationOptions = new CommunicationOptions();	
+		if (communicationOptions == null) {
+			communicationOptions = new CommunicationOptions();
 		}
 		this.communicationOptions = communicationOptions;
 	}
 
 	public PersonHealthData getHealthData() {
-		if(healthData == null){
-			healthData = new PersonHealthData();	
-		}		
+		if (healthData == null) {
+			healthData = new PersonHealthData();
+		}
 		return healthData;
 	}
 
 	public void setHealthData(PersonHealthData healthData) {
-		if(healthData == null){
-			healthData = new PersonHealthData();	
+		if (healthData == null) {
+			healthData = new PersonHealthData();
 		}
 		this.healthData = healthData;
+	}
+
+	public EducationLevel getEducationLevel() {
+		return educationLevel;
+	}
+
+	public void setEducationLevel(EducationLevel educationLevel) {
+		this.educationLevel = educationLevel;
+	}
+
+	public String getProfessionOccupation() {
+		return professionOccupation;
+	}
+
+	public void setProfessionOccupation(String professionOccupation) {
+		this.professionOccupation = professionOccupation;
 	}
 
 }

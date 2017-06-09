@@ -1,4 +1,4 @@
-package org.yacare.model;
+package org.yacare.model.student;
 
 import org.cendra.model.commons.EntityDomain;
 
