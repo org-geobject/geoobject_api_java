@@ -9,13 +9,13 @@ import org.yacare.model.academic.year.AcademicYear;
 import org.yacare.model.student.request_admission.RequestAdmission;
 
 public class AdmissionPeriod {
-
+	
+	private AcademicYear forAcademicYear;
 	private String title;
 	private String comment;
-	private ZonedDateTime start;
-	private ZonedDateTime end;
-	private AcademicYear forAcademicYear;
 	private List<Career> careers = new ArrayList<Career>();
+	private ZonedDateTime start;
+	private ZonedDateTime end;		
 	private Boolean onlyExam = false;
 	private AdmissionCourseInfo admissionCourseInfo = new AdmissionCourseInfo();
 	private List<RequestAdmission> requests = new ArrayList<RequestAdmission>();
